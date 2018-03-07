@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<script type="text/javascript"> 
+    // unblock when ajax activity stops 
+    $(document).ready(function() { 
+    	//substituir por .btn (testar)
+        $('#salvar').click(function() { 
+            $.blockUI({ message: '<h5><img src="/img/ajax-loader.gif" />Por favor, aguarde</h5>' }); 
+        }); 
+    }); 
+</script>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="Zlayout/layout-padrao">
+<head>
+<title>Colibri | Appdate</title>
+<meta charset="UTF-8"></meta>
+</head>
+<section layout:fragment="conteudo">
+	<form action="#" th:action="@{/atualizacao/salvar}" method="post" th:object="${atualizacao}">
+		<div class="form-group">
+			<label class="control-label" for="nome">Descrição da atualização</label>
+			<input type="text" class="form-control" th:field="*{nome}"></input>
+		</div>
+		<div class="form-group">
+			<button id="salvar" type="submit" class="btn btn-success">Criar atualização</button>
+		</div>
+		<div class="form-group alert alert-danger" 
+			th:if="${#fields.hasErrors('*')}">
+			<div th:each="err : ${#fields.errors('*')}">
+				<span th:text="${err}"></span>
+			</div>
+		</div>
+		<div class="form-group alert alert-danger" th:if="${!#strings.isEmpty(produtoMinimo)}">
+			<span th:text="${produtoMinimo}"></span>
+		</div>
+	</form>
+	<div th:if="${#lists.isEmpty(todosProdutos)}" class="alert alert-info">Não há produtos cadastrados!</div>
+	<div th:if="${!#lists.isEmpty(todosProdutos)}" class="table-responsive">
+		<div class="panel panel-default">
+			<div class="panel panel-heading">
+				Listagem de produtos
+			</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th class="text-center">#</th>
+						<th class="text-center">Código</th>
+						<th class="text-center">Nome</th>
+						<th class="text-center"><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span> Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="produto : ${todosProdutos}">
+						<td class="text-center" th:text="${produto.produto.id}"></td>
+						<td class="text-center" th:text="${produto.produto.codigo}"></td>
+						<td class="text-center" th:text="${produto.produto.nome}"></td>
+						<td class="text-center">
+							<div class="btn-group btn-group-sm" role="group" aria-label="...">
+								<a class="btn btn-link" data-toggle="modal" data-target="#confirma" 
+									th:attr="data-codigo=${produto.produto.id}, data-destino='atualizacao/excluir'"
+									id="excluir-produto"> 
+									<span class="glyphicon glyphicon-trash"></span>
+								</a>
+								<a class="btn btn-link">
+									<span class="glyphicon glyphicon-eye-open"></span>
+								</a>
+								<button type="button" class="btn btn-insere" th:classappend="${produto.atualizacao}
+									? btn-success : btn-default"
+									th:attr="data-role=${produto.produto.id}"
+									th:href="@{/atualizacao/{id}/incluir(id=${produto.produto.id})}">
+									<span class="glyphicon glyphicon-phone"></span>
+								</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="modal fade" id="confirma" tabindex="-1" role="dialog" aria-labelledby="titulo"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<form action="" method="post" id="form-confirma">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">Confirmação</h4>
+						<div class="modal-body">
+							Você confirma a exclusão deste item?
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-danger">Excluir</button>
+						</div>
+					</div>
+				</div>	
+			</form>	
+		</div>
+	</div>
+	<script src="/js/cm-js.js"></script>
+	<div id="loading" layout:include="Zlayout/loading-padrao">
+	</div>
+</section>
+</html>

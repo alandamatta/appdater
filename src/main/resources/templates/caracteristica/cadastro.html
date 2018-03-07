@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="Zlayout/layout-padrao">
+<head>
+<title>Característica | Appdate</title>
+<meta charset="UTF-8"></meta>
+</head>
+<section layout:fragment="conteudo">
+
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#cadastro">Cadastro</a></li>
+		<li><a data-toggle="tab" href="#consulta">Consulta</a></li>
+	</ul>
+	
+	<div class="tab-content">
+		<div id="cadastro" class="tab-pane fade in active">
+			<form method="post" action="#" th:action="@{/caracteristica/salvar}" th:object="${caracteristica}">
+				<div class="form-group">
+					<label class="checkbox-inline"> <input id="status"
+						type="checkbox" th:field="*{situacao}"></input>Ativo
+					</label>
+				</div>
+
+				<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+					<label for="nome" class="control-label">Nome*</label> <input id="nome" type="text"
+						class="form-control" th:field="*{nome}"></input>
+				</div>
+
+				<div class="form-group">
+					<label for="descricao">Descrição</label> <input id="descricao"
+						type="text" class="form-control" th:field="*{descricao}"></input>
+				</div>
+
+				<div class="form-group alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+					<span th:text="${mensagem}"></span>
+				</div>
+				
+				<div th:if="${#fields.hasErrors('*')}" class="form-group alert alert-danger">
+					<div th:each="err : ${#fields.errors('*')}">
+						<span  th:text="${err}"></span>
+					</div>				
+				</div>
+
+				<div class="form-group">
+					<button id="salvar" type="submit" class="btn btn-success">Salvar</button>
+				</div>
+			</form>
+		</div>
+		<div id="consulta" class="tab-pane fade">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="col-md-1 text-center">#</th>
+						<th class="col-md-3 text-center">Nome</th>
+						<th class="col-md-5 text-center">Descrição</th>
+						<th class="col-md-1 text-center">Ativo</th>
+						<th class="col-md-2 text-center">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="caracteristica : ${todasCaracteristicas}">
+						<td class="text-center" th:text="${caracteristica.id}"></td>
+						<td class="text-center" th:text="${caracteristica.nome}"></td>
+						<td class="text-center" th:text="${caracteristica.descricao}"></td>
+						<td class="text-center">
+							<span th:classappend="${caracteristica.situacao}? 
+							'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'"></span>
+						</td>
+						<td class="text-center">
+							<a class="btn btn-link" data-toggle="modal" data-target="#confirmacao-editar"
+							th:attr="data-codigo=${caracteristica.id}, data-destino='caracteristica'">
+								<span class="glyphicon glyphicon-edit"></span>
+							</a>
+							<a th:if="${caracteristica.situacao}" class="btn btn-link"><span class="glyphicon glyphicon-trash"></span></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="dialog-confirmaEdicao" layout:include="Zlayout/dialog-confirma"></div>
+	<script src="/js/cm-js.js"></script>
+	<div id="loading" layout:include="Zlayout/loading-padrao">
+	</div>
+</section>
+</html>

@@ -1,0 +1,28 @@
+{
+  "produtosJson" : [ {
+    "id" : "1",
+    "codigo" : "23",
+    "largura" : "12",
+    "profundidade" : "12",
+    "altura" : "12",
+    "volumes" : "12",
+    "peso" : "12.0",
+    "nome" : "teste",
+    "foto" : "img/good_morning_industry-wallpaper-1440x900.jpg",
+    "fotos" : [ {
+      "diretorio" : "img/red_sun_rising-wallpaper-1440x900.jpg"
+    } ],
+    "cores" : [ {
+      "descricao" : "MARROM"
+    } ],
+    "ambientes" : [ {
+      "descricao" : "Sala"
+    } ],
+    "caracteristicas" : [ {
+      "descricao" : "MARROM"
+    } ],
+    "categorias" : [ {
+      "descricao" : "RACK"
+    } ]
+  } ]
+}

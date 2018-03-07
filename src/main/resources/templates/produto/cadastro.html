@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="Zlayout/layout-padrao">
+<head>
+<title>Produto | Appdate</title>
+<meta charset="UTF-8"></meta>
+</head>
+<section layout:fragment="conteudo">
+	<form method="post" action="/produto/salvar" enctype="multipart/form-data" th:object="${produto}">
+	
+	
+		<div class="row col-sm-12">
+			<div th:if="${#fields.hasErrors('*')}" class="form-group alert alert-danger">
+				<div th:each="err : ${#fields.errors('*')}">
+					<span th:text="${err}"></span>
+				</div>
+			</div>
+		</div>
+	
+	
+		<div class="row col-sm-12">
+			<div class="form-group col-sm-12 col-md-12 col-lg-12">
+				<label class="checkbox-inline label-control"> <input id="status"
+					type="checkbox" checked="checked" name="situacao"></input>Ativo*
+				</label>
+			</div>
+		</div>
+		
+		
+		<div class="row col-sm-12">
+		
+			<div class="form-group col-sm-12 col-md-8 col-lg-6" 
+				th:classappend="${#fields.hasErrors('nome')} ? has-error" >
+				<label for="nome" class="control-label">Nome do Produto*</label> <input id="nome" type="text"
+					class="form-control" th:field="*{nome}"></input>
+			</div>
+			
+			<div class="form-group col-sm-12 col-md-4 col-lg-4"
+				th:classappend="${#fields.hasErrors('codigo')} ? has-error">
+				<label for="codigo" class="control-label">Código do Produto*</label> <input id="codigo"
+					type="text" class="form-control" th:field="*{codigo}"></input>
+			</div>
+			
+			<div class="form-group col-sm-12 col-md-2 col-lg-2"
+				th:classappend="${#fields.hasErrors('volumes')} ? has-error">
+				<label for="volumes" class="control-label">Volumes*</label> <input id="volumes"
+					type="text" class="form-control" th:field="*{volumes}"></input>
+			</div>
+			
+		</div>
+		
+		
+		<div class="row col-sm-12">
+			<div class="form-group col-sm-12 col-md-3 col-lg-3"
+				th:classappend="${#fields.hasErrors('altura')} ? has-error">
+				<label for="altura" class="control-label">Altura*</label> <input id="altura"
+					type="text" class="form-control" th:field="*{altura}"></input>
+			</div>
+			
+			<div class="form-group col-sm-12 col-md-3 col-lg-3"
+				th:classappend="${#fields.hasErrors('largura')} ? has-error">
+				<label for="largura" class="control-label">Largura*</label> <input id="largura"
+					type="text" class="form-control" th:field="*{largura}"></input>
+			</div>
+			
+			<div class="form-group col-sm-12 col-md-3 col-lg-3"
+				th:classappend="${#fields.hasErrors('profundidade')} ? has-error">
+				<label for="profundidade" class="control-label">Profundidade*</label> <input id="profundidade"
+					type="text" class="form-control" th:field="*{profundidade}"></input>
+			</div>
+			
+			<div class="form-group col-sm-12 col-md-3 col-lg-3"
+				th:classappend="${#fields.hasErrors('peso')} ? has-error">
+				<label for="peso" class="control-label">Peso*</label> <input id="peso"
+					type="text" class="form-control" th:field="*{peso}"></input>
+			</div>
+		</div>
+		
+		
+		<div class="row col-sm-12">
+			<div class="form-group col-sm-12 col-md-6 col-lg-6">
+				<label for="caracteristicas" class="control-label">Características*</label>
+				<select id="caracteristicas" class="form-control" 
+					th:field="*{caracteristicas}" multiple="multiple">
+					<option th:each="caracteristica : ${caracteristicas}" th:text="${caracteristica.nome}" th:value="${caracteristica.id}">
+ 					</option>
+				</select>
+			</div>
+			
+			<div class="form-group col-sm-12 col-md-6 col-lg-6">
+				<label for="cores" class="control-label">Cores*</label>
+				<select id="cores" class="form-control" th:field="*{cores}" multiple="multiple">
+					<option th:each="cor : ${cores}" th:text="${cor.nome}" th:value="${cor.id}">
+ 					</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="row col-sm-12">
+			<div class="form-group col-sm-12 col-md-6 col-lg-6">
+				<label for="categorias" class="control-label">Categorias*</label>
+				<select id="categorias" class="form-control" th:field="*{categorias}" multiple="multiple">
+					<option th:each="categoria : ${categorias}" 
+						th:text="${categoria.nome}" th:value="${categoria.id}">
+ 					</option>
+				</select>
+			</div>	
+			<div class="form-group col-sm-12 col-md-6 col-lg-6">
+				<div class="form-group col-sm-12 col-md-12 col-lg-12">
+					<label for="fotoPrincipal" class="control-label">Imagem principal*</label>
+					<input type="file" id="fotoPrincipal" name="arquivo"></input>
+					<p class="help-block">Insira a imagem (Mín.598x453) que ficará na lista de todos os produtos.</p>
+				</div>
+				<div class="form-group col-sm-12 col-md-12 col-lg-12">
+					<button type="button" class="btn btn-default">Ver Foto</button>
+				</div>
+			</div>				
+		</div>
+		
+		<div class="row col-sm-12">
+			<div class="form-group col-sm-12 col-md-12 col-lg-12">
+				<label for="fotos">Imagens do produto*</label>
+				<input type="file" id="fotos" name="arquivos" multiple="multiple" class="file" 
+					data-show-upload="false" data-show-remove="false" data-show-caption="true" accept="image"></input>
+				<p class="help-block">Insira as imagens (Mín.598x453) que ficarão no carrossel de imagem do produto.</p>
+			</div>
+		</div>
+		
+		<div class="row col-sm-12">
+			<div class="col-sm-12 col-md-4 col-lg-4">
+				<button id="salvar" type="submit" class="btn btn-success">Salvar</button>
+			</div>
+		</div>		
+	</form>
+	
+	<script src="/js/cm-js.js"></script>
+	<div layout:include="Zlayout/loading-padrao">
+	</div>
+	
+	<script type="text/javascript">
+	    $(document).ready(function() {
+	        $('#cores').multiselect();
+	    });
+	</script>
+	
+</section>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="Zlayout/layout-padrao">
+<head>
+<title>Colibri | Appdate</title>
+<meta charset="UTF-8"></meta>
+</head>
+<section layout:fragment="conteudo">
+	<div class="table-responsive">
+		<div class="panel panel-default">
+			<div class="panel panel-heading">Lista de atualizações</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="col-md-1 text-center">#</th>
+						<th class="col-md-5 text-center">Nome</th>
+						<th class="col-md-2 text-center">Data</th>
+						<th class="col-md-4 text-center"><span class="glyphicon glyphicon-hand-up"
+							aria-hidden="true"></span> Ações</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="att : ${atualizacoes}">
+						<td class="text-center" th:text="${att.id}"></td>
+						<td class="text-center" th:text="${att.nome}"></td>
+						<td class="text-center" th:text="${{att.data}}"></td>
+						<td class="text-center">
+							<div class="btn-group btn-group-sm" role="group" aria-label="...">
+								<button type="button" class="btn btn-success btn-geraJson"
+									th:href="@{/atualizacao/{id}/gerarJson(id=${att.id})}"
+									th:Attr="data-role=${att.id}">
+									<span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+									Gerar Arquivo
+								</button>
+								<button type="button" class="btn btn-danger">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-info">
+									<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-info">
+									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+								</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script src="/js/cm-js.js"></script>
+</section>
+</html>

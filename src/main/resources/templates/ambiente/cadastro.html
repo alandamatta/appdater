@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="Zlayout/layout-padrao">
+<head>
+<title>Colibri | Appdate</title>
+<meta charset="UTF-8"></meta>
+</head>
+<section layout:fragment="conteudo">
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#cadastro">Cadastro</a></li>
+		<li><a data-toggle="tab" href="#consulta">Consulta</a></li>
+	</ul>
+	
+	<div class="tab-content">
+		<div id="cadastro" class="tab-pane fade in active">
+			<form method="post" action="#" th:action="@{/ambiente/salvar}" th:object="${ambiente}">
+				<input type="hidden" th:field="*{id}"></input>
+			
+				<div class="form-group">
+					<label class="checkbox-inline"> <input id="status"
+						type="checkbox" checked="checked" th:field="*{situacao}"></input>Ativo
+					</label>
+				</div>
+
+				<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+					<label for="nome" class="control-label">Nome*</label> <input id="nome" type="text"
+						class="form-control" th:field="*{nome}"></input>
+				</div>
+
+				<div class="form-group">
+					<label for="descricao" class="control-label">Descricao</label> <input id="descricao"
+						type="text" class="form-control" th:field="*{descricao}"></input>
+				</div>
+				
+				<div th:if="${#fields.hasErrors('*')}" class="form-group alert alert-danger">
+					<div th:each="err : ${#fields.errors('*')}">
+						<span  th:text="${err}"></span>
+					</div>				
+				</div>
+				
+				<div th:if="${!#strings.isEmpty(mensagem)}" class="form-group alert alert-success">
+					<span th:text="${mensagem}"></span>
+				</div>
+				
+				<div class="form-group">
+					<button id="salvar" type="submit" class="btn btn-success">Salvar</button>
+					<button th:if="${id} != null" type="button" class="btn btn-default">
+						Cancelar Edição
+					</button>
+				</div>
+			</form>
+			
+		</div>
+		<div id="consulta" class="tab-pane fade">
+			<div class="row col-sm-12">
+				<div class="form-group panel panel-default">
+					<div class="panel-body">
+						<label for="consulta" class="control-label">Consulta</label>
+						<input id="consulta" type="text" class="form-control"></input>
+					</div>
+				</div>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="col-md-1 text-center">#</th>
+						<th class="col-md-3 text-center">Nome</th>
+						<th class="col-md-5 text-center">Descrição</th>
+						<th class="col-md-1 text-center">Ativo</th>
+						<th class="col-md-2 text-center">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="ambiente : ${todosAmbientes}">
+						<td class="text-center" th:text="${ambiente.id}"></td>
+						<td class="text-center" th:text="${ambiente.nome}"></td>
+						<td class="text-center" th:text="${ambiente.descricao}"></td>
+						<td class="text-center">
+							<span th:classappend="${ambiente.situacao}? 
+							'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove'"></span>
+						</td>
+						<td class="text-center">
+							<a class="btn btn-link" data-toggle="modal" data-target="#confirmacao-editar"
+								th:attr="data-codigo=${ambiente.id}, data-destino='ambiente'">
+								<span class="glyphicon glyphicon-edit"></span>
+							</a>
+							<a th:if="${ambiente.situacao}" class="btn btn-link">
+								<span class="glyphicon glyphicon-trash"></span>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="dialog-confirmaEdicao" layout:include="Zlayout/dialog-confirma"></div>
+	<script src="/js/cm-js.js"></script>
+	<div id="loading" layout:include="Zlayout/loading-padrao">
+	</div>
+</section>
+</html>

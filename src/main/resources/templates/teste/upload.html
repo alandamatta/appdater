@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="zLayout/layout-padrao">
+<head>
+<title>Cobrança</title>
+</head>
+<section layout:fragment="conteudo">
+	<form action="/upload/salvar" enctype="multipart/form-data"
+		method="post">
+		<input type="file" multiple="multiple" name="summarys"></input>
+		<button type="submit">Testar</button>
+	</form>
+</section>
+</html>

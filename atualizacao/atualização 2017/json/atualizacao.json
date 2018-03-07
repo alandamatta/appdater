@@ -1,0 +1,36 @@
+{
+  "produtosJson" : [ {
+    "id" : "2",
+    "codigo" : "382717",
+    "largura" : "1",
+    "profundidade" : "1",
+    "altura" : "1",
+    "volumes" : "2",
+    "peso" : "2.0",
+    "nome" : "Produto 1",
+    "foto" : "img/city-night-evening-river.jpg",
+    "fotos" : [ {
+      "diretorio" : "img/blue_bubbles_2-wallpaper-1440x900.jpg"
+    }, {
+      "diretorio" : "img/city_of_dreams-wallpaper-1440x900.jpg"
+    }, {
+      "diretorio" : "img/city-night-evening-river.jpg"
+    }, {
+      "diretorio" : "img/city-sky-lights-night.jpg"
+    }, {
+      "diretorio" : "img/elephant_wildlife-wallpaper-1440x900.jpg"
+    } ],
+    "cores" : [ {
+      "descricao" : "MARROM"
+    } ],
+    "ambientes" : [ {
+      "descricao" : "Sala"
+    } ],
+    "caracteristicas" : [ {
+      "descricao" : "MARROM2"
+    } ],
+    "categorias" : [ {
+      "descricao" : "RACK"
+    } ]
+  } ]
+}

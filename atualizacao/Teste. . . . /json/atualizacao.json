@@ -1,0 +1,57 @@
+{
+  "produtosJson" : [ {
+    "id" : "3",
+    "codigo" : "12313",
+    "largura" : "31",
+    "profundidade" : "31",
+    "altura" : "31",
+    "volumes" : "3",
+    "peso" : "31.0",
+    "nome" : "TESTE",
+    "foto" : "img/chutaqehmacumba.png",
+    "fotos" : [ {
+      "diretorio" : "img/chutaqehmacumba.png"
+    } ],
+    "cores" : [ {
+      "descricao" : "MARROM"
+    } ],
+    "ambientes" : [ {
+      "descricao" : "Sala"
+    } ],
+    "caracteristicas" : [ {
+      "descricao" : "MARROM2"
+    }, {
+      "descricao" : "PORTA DE CORRER"
+    } ],
+    "categorias" : [ {
+      "descricao" : "RACK"
+    } ]
+  }, {
+    "id" : "4",
+    "codigo" : "1234567",
+    "largura" : "123",
+    "profundidade" : "123",
+    "altura" : "123",
+    "volumes" : "1",
+    "peso" : "123.0",
+    "nome" : "produto de teste 1",
+    "foto" : "img/star_wars_darth_vader_war_102011_1440x900.jpg",
+    "fotos" : [ {
+      "diretorio" : "img/sky-earth-space-working.jpg"
+    }, {
+      "diretorio" : "img/spacex1.jpg"
+    } ],
+    "cores" : [ {
+      "descricao" : "MARROM"
+    } ],
+    "ambientes" : [ {
+      "descricao" : "Sala"
+    } ],
+    "caracteristicas" : [ {
+      "descricao" : "MARROM2"
+    } ],
+    "categorias" : [ {
+      "descricao" : "RACK"
+    } ]
+  } ]
+}
